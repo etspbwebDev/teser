@@ -20,9 +20,9 @@ echo ' " “!|\/’”\"';
 // вспомогательные функции  Валидации данных
 function validaterData($value){
     switch ($value){
-        case is_int($value):$value=trim(stripslashes(strip_tags(abs($value))));break;
+        case is_int($value):$value=abs($value);break;
         case is_string($value):$value=trim(stripslashes(strip_tags($value)));break;
-        default:$value= trim(stripslashes(strip_tags(htmlspecialchars($value))));
+
     }
     return $value;
 
@@ -32,15 +32,14 @@ function validaterData($value){
      return !$result;
 
  }
- function checkStrEnd($end){
-    $end=substr($end,-1);
-     switch ($end){
-         case $end>=2 && $end<=4:$formatStrAge="мне ".$end."года"; break;
-         case $end>=5:$formatStrAge="мне ".$end."лет"; break;
-         default:$formatStrAge="мне ".$end."год";
+
+     function checkStrEnd($output){
+
+         return $output%10==1&&$output%100!=11?'год':($output%10>=2&&$output%10<=4&&($output%100<10||$output%100>=20)?'года':'лет');
+
      }
-     return $formatStrAge;
- }
+
+
 // вспомогательные функции  Валидации данных КОНЕЦ
 
 
@@ -52,7 +51,7 @@ $name=validaterData($_POST["name"]);
         $age=validaterData($_POST["age"]);
         if(empty($_POST['name']) &&empty($_POST['age'])|| $_POST['age']!==0){
             if(check_length($name, 2, 50) && check_length($age, 1, 3)) {
-                 $fullstrAge=checkStrEnd($_POST["age"]);
+                 $fullstrAge=checkStrEnd($age);
                 //@QU не пойму почему статус  не миняется
             $status="Данные сохранены";
             } else{
@@ -109,7 +108,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST") {
 }
 ?>
 
-
+<!--
 <!doctype html>
 <html lang="en">
 <head>
@@ -146,12 +145,12 @@ if($_SERVER["REQUEST_METHOD"]=="POST") {
         <input type="submit" id="sub" value="Отправить">
     </fieldset>
 </form>
-<div class="rezalt"><?php echo $rezalt."<br>". ' " “!|\/’”\"'?></div>
+<div class="rezalt"><?php //echo $rezalt."<br>". ' " “!|\/’”\"'?></div>
 </body>
 </html>
 
 
-
+-->
 // End task 1.1
 //====================================================================================
 
@@ -178,6 +177,7 @@ $rezalt=CreateImg();
 
 define("DB_NAME","host");
 
+
 if(DB_NAME){
     echo DB_NAME;
 } else{
@@ -191,7 +191,7 @@ if(DB_NAME){
 // Bigin task 1.4
 <?php
 $age=mt_rand(1,110);
-if($age<=65&& $age>18){
+if($age<=65&& $age>=18){
     echo "Еще работать и работать";
 
 } elseif($age>0&& $age<=17){
@@ -244,18 +244,30 @@ $opel=[
     "year"=>2013
 ];
 
-$auto=array_merge($opel,$tayota,$bmw);
+$auto= ["opel"=>$opel,"tayota"=>$tayota,"bmw"=>$bmw];
 
 
-foreach ($auto as $mark=> $value){
+foreach ($auto as $item=>$value){
+foreach ($value as $key){
+
     echo <<<FORMAT
 <dl>
-<dt>$mark</dt>
-<dd>$value</dd>
+<dt>$item
+<dd>$key</dd>
+</dt>
+
 </dl>
 FORMAT;
 
 }
+
+
+
+
+}
+
+
+
 ?>
 
 // End task 1.6
@@ -269,19 +281,19 @@ FORMAT;
 for ($i = 1; $i <= 10; $i++) {
     for ($j = 1; $j <= 10; $j++){
 if(($j % 2)==0){
-    echo<<<LINE
-<td>(($i*$j))</td>
-LINE;
+    echo"
+<td>(($i*$j))</td>";
+
 
 } elseif(($j % 2)!==0){
-    echo<<<LINE
-<td>[($i*$j)]</td>
-LINE;
+    echo"
+<td>[($i*$j)]</td>";
+
 
 } else{
-    echo<<<LINE
-<td>($i*$j)</td>
-LINE;
+    echo"
+<td>($i*$j)</td>";
+
 
 }
 
@@ -307,9 +319,17 @@ LINE;
 
 $str="Привет МИР PHP";
 $toArr= explode(":",$str);
+$i=0;
+while ($i<=count($toArr)){
+    echo $toArr[$i]."<br>";
+    $i++;
+
+}
+
 $inArr=implode("?",$toArr);
 echo $inArr;
-echo $toArr;
+
+
 echo $str;
 ?>
 
