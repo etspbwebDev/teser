@@ -147,13 +147,38 @@ function showPalindrom($str){
     }
    return $rw;
 }
+
+function createImg(){
+
+$i = imageCreate(500, 300);
+$i = imageCreateTrueColor(500, 300);
+
+
+imageAntiAlias($i, true);
+
+$red = imageColorAllocate($i, 255, 0, 0);
+$white = imageColorAllocate($i, 0xFF, 0xFF, 0xFF);
+$black = imageColorAllocate($i, 0, 0, 0);
+$green = imageColorAllocate($i, 0, 255, 0);
+$blue = imageColorAllocate($i, 0, 0, 255);
+$grey = imageColorAllocate($i, 192, 192, 192);
+
+
+
+   $i= imageEllipse($i, 200, 150, 300, 200, $red);
+    header("Content-type: image/jpg");
+return imageJpeg($i);
+}
+
 function searchRx($strBad){
-    // для быстроты смайл на Svg рисовал
+    //Описал функцию createImg но php почему-то совсем не видит эту библиотеку GD и фун. не отрабаиывает
+    // как фидбэк для быстроты смайл на Svg рисовал
     $pattern="[\d+]";
     $strBad=preg_match($pattern,$strBad,$out);
     if ((int)$out>="1000"){
       $msg="Сеть есть";
     }else{
+       // $msg=createImg();
        header("Content-Type:image/svg");
         $msg=file_get_contents("smile.svg");
     }
