@@ -1,11 +1,17 @@
 <?php
+// Не принято: 1, 2, 3, 4, 5, 6, 8, 9
 
+// Не соответствует заданию
 function strView($arr, $flag = false)
 {
 
     if ($flag) {
         $rezal = explode(" ", $arr);
         foreach ($rezal as $item) {
+            // Не используй такой вывод без объективной необходимости.
+            // Во-первых, затрудняет чтение кода
+            // ...
+            // В-десятых, слишком сильно мешает восприятию
             echo <<<FORMATER
 <p>$item</p><br>
 FORMATER;
@@ -20,7 +26,7 @@ FORMATER;
 
 }
 
-
+// Не принято. Всегда некорректный результат.
 function fixArk($action = "", $intArr = [])
 {
     $msg = "Вы ввели некорректный арифметический оператор";
@@ -56,7 +62,7 @@ function fixArk($action = "", $intArr = [])
     return $rezalt;
 }
 
-
+// Не принято
 function withoutArg()
 {
     $rezalt = null;
@@ -110,6 +116,8 @@ function withoutArg()
 }
 
 
+// Не принято.
+// Не используй для разных целей одни и те же переменные.
 function createTable($a, $b)
 {
     //@QU Не отримовывается таблица почему-то а ркзультат считается
@@ -138,7 +146,7 @@ function createTable($a, $b)
 
 }
 
-
+// Не соответствует заданию
 function isPalindrome($w)
 {
     trim(mb_strtolower($w));
@@ -185,10 +193,13 @@ function createImg()
     return imageJpeg($i);
 }
 
+// Не соответствует заданию.
 function searchRx($strBad)
 {
     //Описал функцию createImg но php почему-то совсем не видит эту библиотеку GD и фун. не отрабаиывает
     // как фидбэк для быстроты смайл на Svg рисовал
+
+    // Есть ли у тебя библиотека php-gd? Включена ли она в php?
     $pattern = "[\d+]";
     $strBad = preg_match($pattern, $strBad, $out);
     if ((int)$out >= "1000") {
@@ -202,6 +213,7 @@ function searchRx($strBad)
 
 }
 
+// Принято
 $inputStr = "Карл у Клары украл Кораллы";
 $pattern = "/К/";
 $replace = " ";
@@ -214,17 +226,22 @@ $replace = "ТРИ";
 $inputStr = preg_replace($pattern, $replace, $inputStr);
 echo $inputStr;
 
-
+// Не принято
+// Правильно
 echo date("Y:m:d:H:i:s");
+// Неправильно
 echo date("H:i:s", "24.02.2016");
+// Не принято. 500 ошибка.
 function readFile()
 {
     return $file = file_get_contents("text.txt");
 }
 
+// Принято
 function createFile()
 {
 //@QU Функция отрабатывает но не создается файл почему-то
+    // Прекрасно создается
     $str = "Hello Again";
     return file_put_contents("anothertest.txt", $str);
 }
