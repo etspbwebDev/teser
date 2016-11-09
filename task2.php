@@ -1,218 +1,237 @@
 <?php
 
-function strView($arr,$flag=false){
+function strView($arr, $flag = false)
+{
 
-if($flag){
-    $rezal=explode(" ",$arr);
-    foreach ($rezal as $item){
-        echo <<<FORMATER
+    if ($flag) {
+        $rezal = explode(" ", $arr);
+        foreach ($rezal as $item) {
+            echo <<<FORMATER
 <p>$item</p><br>
 FORMATER;
 
 
-    }
-} else{
-$rezal="";
+        }
+    } else {
+        $rezal = "";
 
-}
+    }
     return $arr;
 
 }
 
 
-function fixArk ($action="", $intArr=[]){
-    $msg="Вы ввели некорректный арифметический оператор";
-    $rezalt=NULL;
-    switch ($action){
-        case("-"):foreach ($intArr as $item=>$value){
+function fixArk($action = "", $intArr = [])
+{
+    $msg = "Вы ввели некорректный арифметический оператор";
+    $rezalt = null;
+    switch ($action) {
+        case("-"):
+            foreach ($intArr as $item => $value) {
 
-            $rezalt=$value-$value;
-        }; break;
-        case("+"):foreach ($intArr as $item=>$value){
+                $rezalt = $value - $value;
+            };
+            break;
+        case("+"):
+            foreach ($intArr as $item => $value) {
 
-            $rezalt=$value+$value;
-        }; break;
-        case("*"):foreach ($intArr as $item=>$value){
+                $rezalt = $value + $value;
+            };
+            break;
+        case("*"):
+            foreach ($intArr as $item => $value) {
 
-            $rezalt=$value*$value;
-        }; break;
-        case(":"):foreach ($intArr as $item=>$value){
+                $rezalt = $value * $value;
+            };
+            break;
+        case(":"):
+            foreach ($intArr as $item => $value) {
 
-            $rezalt=$value/$value;
-        }; break;
-        default:$rezalt="0<br>.$msg";
+                $rezalt = $value / $value;
+            };
+            break;
+        default:
+            $rezalt = "0<br>.$msg";
     }
     return $rezalt;
 }
 
 
-
-function withoutArg (){
-$rezalt=NULL;
-if(func_num_args()==1){
-    $arg=func_get_args();
-    if(is_string($arg[0])){
-        switch ($arg[0]){
-            case("-"):foreach ($arg as $item=>$value){
-                if ($item>0){
-                    continue;
-                }
-                $rezalt=$value-$value;
-            }; break;
-            case("+"):foreach ($arg as $item=>$value){
-                if ($item>0){
-                    continue;
-                }
-                $rezalt=$value+$value;
-            }; break;
-            case("*"):foreach ($arg as $item=>$value){
-                if ($item>0){
-                    continue;
-                }
-                $rezalt=$value*$value;
-            }; break;
-            case(":"):foreach ($arg as $item=>$value){
-                if ($item>0){
-                    continue;
-                }
-                $rezalt=$value/$value;
-            }; break;
-            default:$rezalt="Введите корректный арифметический оператор";
+function withoutArg()
+{
+    $rezalt = null;
+    if (func_num_args() == 1) {
+        $arg = func_get_args();
+        if (is_string($arg[0])) {
+            switch ($arg[0]) {
+                case("-"):
+                    foreach ($arg as $item => $value) {
+                        if ($item > 0) {
+                            continue;
+                        }
+                        $rezalt = $value - $value;
+                    };
+                    break;
+                case("+"):
+                    foreach ($arg as $item => $value) {
+                        if ($item > 0) {
+                            continue;
+                        }
+                        $rezalt = $value + $value;
+                    };
+                    break;
+                case("*"):
+                    foreach ($arg as $item => $value) {
+                        if ($item > 0) {
+                            continue;
+                        }
+                        $rezalt = $value * $value;
+                    };
+                    break;
+                case(":"):
+                    foreach ($arg as $item => $value) {
+                        if ($item > 0) {
+                            continue;
+                        }
+                        $rezalt = $value / $value;
+                    };
+                    break;
+                default:
+                    $rezalt = "Введите корректный арифметический оператор";
+            }
+        } else {
+            $rezalt = "Вы не передали арифметический оператор";
         }
-    } else{
-        $rezalt="Вы не передали арифметический оператор";
+
+    } else {
+        $rezalt = "Вы не передали не один аргумент";
+    }
+    return $rezalt;
+}
+
+
+function createTable($a, $b)
+{
+    //@QU Не отримовывается таблица почему-то а ркзультат считается
+    $reza11 = "";
+    $reza12 = "";
+    $reza13 = "";
+    $reza14 = "";
+    if (is_int($a) && is_int($b)) {
+        $reza11 = "<table><tr>";
+        for ($a = 1; $a <= $a; $a++) {
+            for ($b = 1; $b <= $b; $b++) {
+                $reza12 = "<td>" . ($a * $b) . "</td>";
+
+            }
+            if ($a != $a && $b != $b) {
+                $reza13 = "<tr></tr>";
+            }
+        }
+        $reza14 = "</tr></table>";
+        $all = $reza11 . $reza12 . $reza13 . $reza14;
+        return $all;
+    } else {
+        $all = "Передайте число";
+        return $all;
     }
 
-} else{
-    $rezalt= "Вы не передали не один аргумент";
-}
-return $rezalt;
 }
 
 
-
-
-  function createTable($a,$b){
-      //@QU Не отримовывается таблица почему-то а ркзультат считается
-      $reza11="";
-      $reza12="";
-      $reza13="";
-      $reza14="";
-if (is_int($a)&& is_int($b)) {
-    $reza11= "<table><tr>";
-    for ($a = 1; $a <= $a; $a++) {
-        for ($b = 1; $b <= $b; $b++){
-            $reza12="<td>".($a*$b)."</td>";
-
-        }
-        if ($a != $a &&$b != $b){
-            $reza13= "<tr></tr>";
-        }
-    }
-    $reza14="</tr></table>";
-    $all=$reza11.$reza12.$reza13.$reza14;
-    return $all;
-} else{
-    $all="Передайте число";
-    return $all;
-}
-
-  }
-
-
-
-
-
-
-
-function isPalindrome($w){
+function isPalindrome($w)
+{
     trim(mb_strtolower($w));
-    for($i = 0, $l = mb_strlen($w)-1, $il = ceil($l/2); $i < $il; ++$i){
-        if($w[$i] != $w[$l-$i]){
+    for ($i = 0, $l = mb_strlen($w) - 1, $il = ceil($l / 2); $i < $il; ++$i) {
+        if ($w[$i] != $w[$l - $i]) {
             return false;
-        } else{
+        } else {
             return true;
         }
     }
 
 
-
 }
 
-function showPalindrom($str){
-    if (isPalindrome($str)){
-        $rw="Это полиндром";
-    } else{
-        $rw="Это не полиндром";
+function showPalindrom($str)
+{
+    if (isPalindrome($str)) {
+        $rw = "Это полиндром";
+    } else {
+        $rw = "Это не полиндром";
     }
-   return $rw;
+    return $rw;
 }
 
-function createImg(){
+function createImg()
+{
 
-$i = imageCreate(500, 300);
-$i = imageCreateTrueColor(500, 300);
-
-
-imageAntiAlias($i, true);
-
-$red = imageColorAllocate($i, 255, 0, 0);
-$white = imageColorAllocate($i, 0xFF, 0xFF, 0xFF);
-$black = imageColorAllocate($i, 0, 0, 0);
-$green = imageColorAllocate($i, 0, 255, 0);
-$blue = imageColorAllocate($i, 0, 0, 255);
-$grey = imageColorAllocate($i, 192, 192, 192);
+    $i = imageCreate(500, 300);
+    $i = imageCreateTrueColor(500, 300);
 
 
+    imageAntiAlias($i, true);
 
-   $i= imageEllipse($i, 200, 150, 300, 200, $red);
+    $red = imageColorAllocate($i, 255, 0, 0);
+    $white = imageColorAllocate($i, 0xFF, 0xFF, 0xFF);
+    $black = imageColorAllocate($i, 0, 0, 0);
+    $green = imageColorAllocate($i, 0, 255, 0);
+    $blue = imageColorAllocate($i, 0, 0, 255);
+    $grey = imageColorAllocate($i, 192, 192, 192);
+
+
+    $i = imageEllipse($i, 200, 150, 300, 200, $red);
     header("Content-type: image/jpg");
-return imageJpeg($i);
+    return imageJpeg($i);
 }
 
-function searchRx($strBad){
+function searchRx($strBad)
+{
     //Описал функцию createImg но php почему-то совсем не видит эту библиотеку GD и фун. не отрабаиывает
     // как фидбэк для быстроты смайл на Svg рисовал
-    $pattern="[\d+]";
-    $strBad=preg_match($pattern,$strBad,$out);
-    if ((int)$out>="1000"){
-      $msg="Сеть есть";
-    }else{
-       // $msg=createImg();
-       header("Content-Type:image/svg");
-        $msg=file_get_contents("smile.svg");
+    $pattern = "[\d+]";
+    $strBad = preg_match($pattern, $strBad, $out);
+    if ((int)$out >= "1000") {
+        $msg = "Сеть есть";
+    } else {
+        // $msg=createImg();
+        header("Content-Type:image/svg");
+        $msg = file_get_contents("smile.svg");
     }
     return $msg;
 
 }
-$inputStr= "Карл у Клары украл Кораллы";
-$pattern="/К/";
-$replace=" ";
-$inputStr=preg_replace($pattern,$replace,$inputStr);
+
+$inputStr = "Карл у Клары украл Кораллы";
+$pattern = "/К/";
+$replace = " ";
+$inputStr = preg_replace($pattern, $replace, $inputStr);
 echo $inputStr;
 
-$inputStr= "Две бутылки лимонада";
-$pattern="/Две/";
-$replace="ТРИ";
-$inputStr=preg_replace($pattern,$replace,$inputStr);
+$inputStr = "Две бутылки лимонада";
+$pattern = "/Две/";
+$replace = "ТРИ";
+$inputStr = preg_replace($pattern, $replace, $inputStr);
 echo $inputStr;
 
 
-
-echo  date("Y:m:d:H:i:s");
-echo date("H:i:s","24.02.2016");
-function readFile(){
-    return $file=file_get_contents("text.txt");
+echo date("Y:m:d:H:i:s");
+echo date("H:i:s", "24.02.2016");
+function readFile()
+{
+    return $file = file_get_contents("text.txt");
 }
 
-function createFile(){
+function createFile()
+{
 //@QU Функция отрабатывает но не создается файл почему-то
-    $str="Hello Again";
-    return file_put_contents("anothertest.txt",$str);
+    $str = "Hello Again";
+    return file_put_contents("anothertest.txt", $str);
 }
+
 ?>
 
 
-<div class="View"> <?php echo  readFile();  ?></div>
-<div class="View"> <?php echo  createFile();  ?></div>
-<div class="View"> <?php echo  searchRx("RX packets:950381 errors:0 dropped:0 overruns:0 frame:0.");  ?></div>
+<div class="View"> <?php echo readFile(); ?></div>
+<div class="View"> <?php echo createFile(); ?></div>
+<div class="View"> <?php echo searchRx("RX packets:950381 errors:0 dropped:0 overruns:0 frame:0."); ?></div>
